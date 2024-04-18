@@ -8,10 +8,19 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject settingsScreen;
+    public GameObject infoScreen;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        infoScreen.SetActive(true);
+        Time.timeScale = 0f;
+        gameIsPaused = true;
+    }
+
     void Start()
     {
-        
+        //StartGame();
     }
 
     // Update is called once per frame
@@ -61,6 +70,12 @@ public class PauseMenu : MonoBehaviour
         settingsScreen.SetActive(false);
     }
 
+    public void CloseInfoScreen()
+    {
+        infoScreen.SetActive(false);
+        Time.timeScale = 1f;
+        gameIsPaused = false;
+    }
     public void ExitGame()
     {
         Debug.Log("Exiting Game...");
