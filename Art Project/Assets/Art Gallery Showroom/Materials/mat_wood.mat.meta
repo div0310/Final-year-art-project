@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f796dd9009433d34cbf08c3baaf35468
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141559
+  packageName: Art Gallery Showroom
+  packageVersion: 1.0
+  assetPath: Assets/Art Gallery Showroom/Materials/mat_wood.mat
+  uploadId: 300060

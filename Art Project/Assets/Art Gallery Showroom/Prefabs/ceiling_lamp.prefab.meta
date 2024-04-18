@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c673689b033a3c24e997902a2069f51a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141559
+  packageName: Art Gallery Showroom
+  packageVersion: 1.0
+  assetPath: Assets/Art Gallery Showroom/Prefabs/ceiling_lamp.prefab
+  uploadId: 300060

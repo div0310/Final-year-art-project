@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d5fa98a5df9f02345bbc149d21c88805
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141559
+  packageName: Art Gallery Showroom
+  packageVersion: 1.0
+  assetPath: Assets/Art Gallery Showroom/Materials/mat_ceiling.mat
+  uploadId: 300060

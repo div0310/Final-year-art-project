@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5b0d07ccbf83ca742b14f47c6263d9e9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141559
+  packageName: Art Gallery Showroom
+  packageVersion: 1.0
+  assetPath: Assets/Art Gallery Showroom/Materials/mat_wall_white.mat
+  uploadId: 300060

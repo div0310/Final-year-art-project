@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 65a250e78387d3840aab0903581613d7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141559
+  packageName: Art Gallery Showroom
+  packageVersion: 1.0
+  assetPath: Assets/Art Gallery Showroom/Materials/mat_gold.mat
+  uploadId: 300060

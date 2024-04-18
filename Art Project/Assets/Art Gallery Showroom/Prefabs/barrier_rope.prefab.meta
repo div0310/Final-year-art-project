@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 171cb9e181865f449bc2d6edacda2a3c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141559
+  packageName: Art Gallery Showroom
+  packageVersion: 1.0
+  assetPath: Assets/Art Gallery Showroom/Prefabs/barrier_rope.prefab
+  uploadId: 300060

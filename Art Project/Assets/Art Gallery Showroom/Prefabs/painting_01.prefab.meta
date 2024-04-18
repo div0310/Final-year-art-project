@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bcdc635e6cf0f1540a4c1aa1677a9468
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141559
+  packageName: Art Gallery Showroom
+  packageVersion: 1.0
+  assetPath: Assets/Art Gallery Showroom/Prefabs/painting_01.prefab
+  uploadId: 300060

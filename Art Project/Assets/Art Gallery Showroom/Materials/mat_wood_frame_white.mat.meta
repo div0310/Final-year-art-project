@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cf49ee44d67b70544bc72e45d3fc2aca
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141559
+  packageName: Art Gallery Showroom
+  packageVersion: 1.0
+  assetPath: Assets/Art Gallery Showroom/Materials/mat_wood_frame_white.mat
+  uploadId: 300060

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 80f8497653ef51b4fa11ef59eb44b0c6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141559
+  packageName: Art Gallery Showroom
+  packageVersion: 1.0
+  assetPath: Assets/Art Gallery Showroom/Prefabs/floor.prefab
+  uploadId: 300060

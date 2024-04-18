@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 396232f9d1a609a4cad13ef5a53c581d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 141559
+  packageName: Art Gallery Showroom
+  packageVersion: 1.0
+  assetPath: Assets/Art Gallery Showroom/Materials/mat_emissive_high.mat
+  uploadId: 300060
