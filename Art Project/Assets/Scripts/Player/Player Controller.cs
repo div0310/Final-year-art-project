@@ -65,8 +65,6 @@ public class PlayerController : MonoBehaviour
     private void ResetCollisionFlag() => isGuardCollidingPlayer = false;
 
 
-
-
     void TakeDamage(Vector3 recoilDirection)
     {
         playerRB.AddForce(recoilDirection * recoilForce);
@@ -102,6 +100,17 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    //IEnumerator RotatePlayer(Quaternion targetRotation, float speed)
+    //{
+    //    float step = speed * Time.deltaTime;
+    //    while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+    //    {
+    //        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, step);
+    //        yield return null;
+    //    }
+    //}
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -125,6 +134,10 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetTrigger("Walk");
             playerAnim.ResetTrigger("Idle");
             walking = true;
+
+            //Quaternion targetRotation = Quaternion.Euler(0, transform.eulerAngles.y + 180f, 0);
+            //StartCoroutine(RotatePlayer(targetRotation, _playerTurnSpeed));
+            
             //steps1.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.S))
