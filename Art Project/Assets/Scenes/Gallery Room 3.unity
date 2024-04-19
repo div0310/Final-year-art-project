@@ -9577,12 +9577,12 @@ PrefabInstance:
         to capture the experience of the individual and the beauty and mystery of
         the natural world.
 
-        
 
-        Please walk around the room and use
-        your mouse to click on the images you see displayed on the pillars. This
-        prompt will allow you to learn information about the different art pieces.
-        Make sure to pay attention!
+
+        Please walk around the room and use your mouse
+        to click on the images you see displayed on the pillars. This prompt will
+        allow you to learn information about the different art pieces. Make sure
+        to pay attention!
 
 '
       objectReference: {fileID: 0}
@@ -11799,9 +11799,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13d4a0304fad2a4a95e954dd0285e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 180
+  timeValue: 10
   timeText: {fileID: 1013747178}
-  currentScene: 
+  currentScene: Gallery Room 3
 --- !u!114 &1013747178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21667,6 +21667,10 @@ PrefabInstance:
     - target: {fileID: 4562632244371718159, guid: 225f94f707323b941b3e720fa2c55b3f, type: 3}
       propertyPath: m_Name
       value: Guard_Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 4562632244371718159, guid: 225f94f707323b941b3e720fa2c55b3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6140876523609642264, guid: 225f94f707323b941b3e720fa2c55b3f, type: 3}
       propertyPath: m_LocalPosition.x

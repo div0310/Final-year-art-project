@@ -14,7 +14,12 @@ public class TimerRoom : MonoBehaviour
     //public string nextScene;
     public string currentScene;
 
+    public GameObject pointsCounter;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(pointsCounter);
+    }
     void Start()
     {
         currentTime = timeValue;
@@ -54,7 +59,7 @@ public class TimerRoom : MonoBehaviour
     {
         if (currentScene == "Gallery Room 1")
         {
-            SceneManager.LoadScene("Maze Scene 1");
+            SceneManager.LoadScene("Maze Scene 2");
         }
         else if(currentScene == "Gallery Room 2")
         {
@@ -70,6 +75,14 @@ public class TimerRoom : MonoBehaviour
         {
             SceneManager.LoadScene("Gallery Room 2");
         }
+        else if (currentScene == "Maze Scene 2")
+        {
+            SceneManager.LoadScene("Gallery Room 2");
+        }
+        else if (currentScene == "Maze Scene 3")
+        {
+            SceneManager.LoadScene("Win");
+        }
         //else
         //{
         //    return;
@@ -78,4 +91,6 @@ public class TimerRoom : MonoBehaviour
         // Load the next scene when the timer is up
         //SceneManager.LoadScene(scene);
     }
+
+    
 }
