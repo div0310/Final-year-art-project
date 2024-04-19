@@ -18,11 +18,6 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = true;
     }
 
-    void Start()
-    {
-        //StartGame();
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -70,6 +65,7 @@ public class PauseMenu : MonoBehaviour
         settingsScreen.SetActive(false);
     }
 
+    //function that unfreezes game after continue button is clicked
     public void CloseInfoScreen()
     {
         infoScreen.SetActive(false);
