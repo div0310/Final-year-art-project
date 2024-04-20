@@ -8,18 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class TimerRoom : MonoBehaviour
 {
+    //INITIALIZE POINTSYSTEM HERE AND 
     public float timeValue = 180f; // Total time in seconds
     public TMP_Text timeText;
     private float currentTime;
     //public string nextScene;
     public string currentScene;
 
-    public GameObject pointsCounter;
-
-    private void Awake()
-    {
-        DontDestroyOnLoad(pointsCounter);
-    }
     void Start()
     {
         currentTime = timeValue;
@@ -27,6 +22,7 @@ public class TimerRoom : MonoBehaviour
 
     void Update()
     {
+        //IF POINTS <
         if (timeValue > 0)
         {
             timeValue -= Time.deltaTime;
@@ -57,6 +53,7 @@ public class TimerRoom : MonoBehaviour
 
     void LoadNextScene()
     {
+        //IF POINTS < 4 RESTART GAME ELSE ... REST OF CODE
         if (currentScene == "Gallery Room 1")
         {
             SceneManager.LoadScene("Maze Scene 2");

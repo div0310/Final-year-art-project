@@ -13,6 +13,10 @@ public class EnemyAI : MonoBehaviour
     private Transform targetPatrolPoint;
     private NavMeshAgent navMeshAgent;
     private bool isChasing = false;
+    public float attackRange = 1;
+    public float chaseCooldownTime = 5f;
+    public float currentCooldownTime = 0;
+    public bool isOnCooldown = false;
     Animator _animator;
 
     void Start()
@@ -47,35 +51,64 @@ public class EnemyAI : MonoBehaviour
         // Calculate the distance between the enemy and the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // If the player is within the chase range, start chasing the player
-        if (distanceToPlayer <= chaseRange)
+        if (isOnCooldown)//enemy stops 
         {
-            isChasing = true;
-
-            bool isMaze = SceneManager.GetActiveScene().name.StartsWith("Maze");
-            navMeshAgent.speed = isMaze ? 1.1f : 2f; 
-            // code above will set the speed 1.1 in maze, 2 is too much for this scene, rest of the sceenes, it works fine.
-
-            navMeshAgent.angularSpeed = 360;
-            _animator.Play("Run_F 0");
-            SetDestination(player.position);
+            currentCooldownTime -= Time.deltaTime;
+            if(currentCooldownTime < 4)
+            {
+                _animator.Play("New anim");
+            }
+            if (currentCooldownTime <= 0) 
+            {
+                isOnCooldown = false;
+            }
         }
         else
         {
-            // If not chasing, check if the enemy has reached the target patrol point
-            if (!isChasing && navMeshAgent.remainingDistance < 0.1f)
+            // If the player is within the chase range, start chasing the player
+            if (distanceToPlayer <= chaseRange && distanceToPlayer > attackRange)
             {
-                // Move to the next patrol point
-                GetNextPatrolPoint();
+
+                isChasing = true;
+
+                bool isMaze = SceneManager.GetActiveScene().name.StartsWith("Maze");
+                navMeshAgent.speed = isMaze ? 1.1f : 2f;
+                // code above will set the speed 1.1 in maze, 2 is too much for this scene, rest of the sceenes, it works fine.
+
+                navMeshAgent.angularSpeed = 360;
+                _animator.Play("Run_F 0");
+                SetDestination(player.position);
             }
-            else if (isChasing && distanceToPlayer > chaseRange)
+            else if(distanceToPlayer <= attackRange)//when enemy reaches the player 
             {
-                // If chasing and player goes out of range, stop chasing and go back to patrolling
-                isChasing = false;
-                _animator.Play("Walk_F");
-                navMeshAgent.angularSpeed = 120;
-                GetNextPatrolPoint();
+                bool isMaze = SceneManager.GetActiveScene().name.StartsWith("Maze");
+                navMeshAgent.speed = isMaze ? 1.1f : 2f;
+                // code above will set the speed 1.1 in maze, 2 is too much for this scene, rest of the sceenes, it works fine.
+
+                navMeshAgent.angularSpeed = 360;
+                _animator.Play("Victory");
+                currentCooldownTime = chaseCooldownTime; //restarting cooldown time
+                isOnCooldown = true;
+                
+            }
+            else
+            {
+                // If not chasing, check if the enemy has reached the target patrol point
+                if (!isChasing && navMeshAgent.remainingDistance < 0.1f)
+                {
+                    // Move to the next patrol point
+                    GetNextPatrolPoint();
+                }
+                else if (isChasing && distanceToPlayer > chaseRange)
+                {
+                    // If chasing and player goes out of range, stop chasing and go back to patrolling
+                    isChasing = false;
+                    _animator.Play("Walk_F");
+                    navMeshAgent.angularSpeed = 120;
+                    GetNextPatrolPoint();
+                }
             }
         }
+        
     }
 }
