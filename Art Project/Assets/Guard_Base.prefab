@@ -1817,7 +1817,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2730361436776683657
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1831,6 +1831,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -1857,6 +1858,10 @@ MonoBehaviour:
   - {fileID: 0}
   player: {fileID: 0}
   chaseRange: 6
+  attackRange: 1
+  chaseCooldownTime: 5
+  currentCooldownTime: 0
+  isOnCooldown: 0
 --- !u!65 &8445353795928312119
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1894,7 +1899,7 @@ NavMeshAgent:
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 1.89
   m_BaseOffset: 0
