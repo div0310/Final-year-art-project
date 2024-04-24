@@ -102,21 +102,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator RotatePlayer(Quaternion targetRotation, float speed)
-    {
-        float step = speed * Time.deltaTime;
-        while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, step);
-            yield return null;
-        }
-    }
+    //IEnumerator RotatePlayer(Quaternion targetRotation, float speed)
+    //{
+    //    float step = speed * Time.deltaTime;
+    //    while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
+    //    {
+    //        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, step);
+    //        yield return null;
+    //    }
+    //}
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            //SetRotation(false);
+            SetRotation(false);
             playerAnim.SetTrigger("Walk");
             playerAnim.ResetTrigger("Idle");
             walking = true;
@@ -136,8 +136,8 @@ public class PlayerController : MonoBehaviour
             playerAnim.ResetTrigger("Idle");
             walking = true;
 
-            Quaternion targetRotation = Quaternion.Euler(0, transform.eulerAngles.y + 180f, 0);
-            StartCoroutine(RotatePlayer(targetRotation, _playerTurnSpeed));
+            //Quaternion targetRotation = Quaternion.Euler(0, transform.eulerAngles.y + 180f, 0);
+            //StartCoroutine(RotatePlayer(targetRotation, _playerTurnSpeed));
 
             //steps1.SetActive(true);
         }
