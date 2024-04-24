@@ -9566,7 +9566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3940449726820175484, guid: 1aa58377e51ebf5479bcc4bb63b916a8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4079567362939451567, guid: 1aa58377e51ebf5479bcc4bb63b916a8, type: 3}
       propertyPath: m_text
@@ -9576,7 +9576,6 @@ PrefabInstance:
         to its expression of classical Greco-Roman traditions, Renaissance art sought
         to capture the experience of the individual and the beauty and mystery of
         the natural world.
-
 
 
         Please walk around the room and use your mouse

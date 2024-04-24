@@ -7,6 +7,7 @@ using TMPro;
 public class PointsCounter : MonoBehaviour
 {
     public TMP_Text pointsText;
+    public int scenePoints = 0;
  //SCENE POINTS FOIR THAT SCENE
 
     private int points = 0;

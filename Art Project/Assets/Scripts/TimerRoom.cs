@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class TimerRoom : MonoBehaviour
 {
     //INITIALIZE POINTSYSTEM HERE AND 
+    private PointsCounter scenePoints;
+    private HealthBarSystem health;
     public float timeValue = 180f; // Total time in seconds
     public TMP_Text timeText;
     private float currentTime;
@@ -56,7 +58,7 @@ public class TimerRoom : MonoBehaviour
         //IF POINTS < 4 RESTART GAME ELSE ... REST OF CODE
         if (currentScene == "Gallery Room 1")
         {
-            SceneManager.LoadScene("Maze Scene 2");
+            SceneManager.LoadScene("Maze Scene 1");
         }
         else if(currentScene == "Gallery Room 2")
         {
@@ -74,11 +76,11 @@ public class TimerRoom : MonoBehaviour
         }
         else if (currentScene == "Maze Scene 2")
         {
-            SceneManager.LoadScene("Gallery Room 2");
+            SceneManager.LoadScene("Gallery Room 3");
         }
         else if (currentScene == "Maze Scene 3")
         {
-            SceneManager.LoadScene("Win");
+            SceneManager.LoadScene("Winning Scene");
         }
         //else
         //{

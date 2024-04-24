@@ -2168,7 +2168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13d4a0304fad2a4a95e954dd0285e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 120
+  timeValue: 10
   timeText: {fileID: 760677356}
   currentScene: Maze Scene 2
 --- !u!114 &760677356
@@ -4131,6 +4131,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1251315976 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7635012224748812536, guid: fb7bf8c4b9d63b7458ae07cdc53f5ae5, type: 3}
+  m_PrefabInstance: {fileID: 786917195}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1252972844
 GameObject:
   m_ObjectHideFlags: 0
@@ -8133,7 +8138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1613486130}
   settingsScreen: {fileID: 1315349189}
-  infoScreen: {fileID: 0}
+  infoScreen: {fileID: 1251315976}
 --- !u!1 &2067238074
 GameObject:
   m_ObjectHideFlags: 0
