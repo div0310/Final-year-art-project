@@ -8,9 +8,11 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public Animator playerAnim;
-    public float health;
+    public HealthBar healthBar;
+    public int maxHealth = 100;
+    public int currentHealth;
     bool isGuardCollidingPlayer;
-    HealthBarSliderScript _healthBarSliderScript;
+    //HealthBarSliderScript _healthBarSliderScript;
 
     public Rigidbody playerRB;
     public float walking_speed, sneakWalk_speed, oldWalking_speed, rotation_speed;
@@ -25,8 +27,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerRB = GetComponent<Rigidbody>();
-        _healthBarSliderScript = FindObjectOfType<HealthBarSliderScript>();
-        _healthBarSliderScript.SetMaxHealth(health); // assign given health in inspector to slider.
+        healthBar.SetMaxHealth(maxHealth);
+        //_healthBarSliderScript = FindObjectOfType<HealthBarSliderScript>();
+        //_healthBarSliderScript.SetMaxHealth(health); // assign given health in inspector to slider.
         _isMaze = SceneManager.GetActiveScene().name.StartsWith("Maze");
 
     }
@@ -69,15 +72,15 @@ public class PlayerController : MonoBehaviour
     void TakeDamage(Vector3 recoilDirection)
     {
         playerRB.AddForce(recoilDirection * recoilForce);
-        health -= 10; // can set a threshold instead of 1.
-        _healthBarSliderScript.SetHealth(health);
+        currentHealth -= 10; // can set a threshold instead of 1.
+        healthBar.SetHealth(currentHealth);
 
-        if (health < 1)
+        if (currentHealth < 1)
         {
             //implement restart game logic
         }
 
-        Debug.Log(health);
+        Debug.Log(currentHealth);
     }
 
     void SetRotation(bool faceCamera)
@@ -102,16 +105,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //IEnumerator RotatePlayer(Quaternion targetRotation, float speed)
-    //{
-    //    float step = speed * Time.deltaTime;
-    //    while (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f)
-    //    {
-    //        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, step);
-    //        yield return null;
-    //    }
-    //}
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -135,9 +128,6 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetTrigger("Walk");
             playerAnim.ResetTrigger("Idle");
             walking = true;
-
-            //Quaternion targetRotation = Quaternion.Euler(0, transform.eulerAngles.y + 180f, 0);
-            //StartCoroutine(RotatePlayer(targetRotation, _playerTurnSpeed));
 
             //steps1.SetActive(true);
         }
