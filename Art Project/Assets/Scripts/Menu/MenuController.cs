@@ -8,6 +8,7 @@ public class MenuController : MonoBehaviour
 {
     public string _newGameLevel;
     public GameObject settingsScreen;
+    public GameObject howToPlayScreen;
 
     public void NewGameLevel()
     {
@@ -23,6 +24,17 @@ public class MenuController : MonoBehaviour
     {
         settingsScreen.SetActive(false);
     }
+
+    public void OpenHowToPlay()
+    {
+        howToPlayScreen.SetActive(true);
+    }
+
+    public void CloseHowToPlay()
+    {
+        howToPlayScreen.SetActive(false);
+    }
+
 
     public void ExitGame()
     {
