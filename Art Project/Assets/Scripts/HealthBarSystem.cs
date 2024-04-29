@@ -16,19 +16,14 @@ public class HealthBarSystem : MonoBehaviour
         CurrentHealth = PlayerPrefs.GetInt(healthBarKey);
     }
 
-    public void SetPoints(int health)
+    public void SetHealth(int health)
     {
         PlayerPrefs.SetInt(healthBarKey, health);
-    }
-
-    public void Update()
-    {
-        if (CurrentHealth < 0)
+        if (CurrentHealth <= 0)
         {
             SceneManager.LoadScene("Game Over Scene");
         }
     }
-    //UPDATE METHOD CHECK IF CURRENT POINTS >= 10 
-    //PLAY VICTORY SCENE
+
 
 }

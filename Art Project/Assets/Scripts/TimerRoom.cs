@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-//using UnityEditor.SearchService;
 
 public class TimerRoom : MonoBehaviour
 {
     //INITIALIZE POINTSYSTEM HERE AND 
     private PointsCounter scenePoints;
+    private PointsSystem pointsSystem;
     private HealthBarSystem health;
     public float timeValue = 180f; // Total time in seconds
     public TMP_Text timeText;
@@ -17,31 +17,38 @@ public class TimerRoom : MonoBehaviour
     //public string nextScene;
     public string currentScene;
 
+    private bool timerStopped = false; // Flag to indicate if the timer has been stopped
+
     void Start()
     {
         currentTime = timeValue;
+        scenePoints = FindObjectOfType<PointsCounter>(); // Initialize scenePoints
+        pointsSystem = FindObjectOfType<PointsSystem>(); // Initialize pointsSystem
+        health = FindObjectOfType<HealthBarSystem>(); // Initialize health
     }
 
     void Update()
     {
-        //IF POINTS <
-        if (timeValue > 0)
+        if (!timerStopped) // Check if the timer is running
         {
-            timeValue -= Time.deltaTime;
+            //IF POINTS <
+            if (timeValue > 0)
+            {
+                timeValue -= Time.deltaTime;
+            }
+            else
+            {
+                timeValue = 0;
+                LoadNextScene();
+                //change scene
+            }
+            DisplayTime(timeValue);
         }
-        else
-        {
-            timeValue = 0;
-            LoadNextScene();
-            //change scene
-        }
-        DisplayTime(timeValue);
-        
     }
 
     void DisplayTime(float timeToDisplay)
     {
-        if( timeToDisplay < 0)
+        if (timeToDisplay < 0)
         {
             timeToDisplay = 0;
         }
@@ -50,46 +57,75 @@ public class TimerRoom : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-
     }
 
     void LoadNextScene()
     {
-        //IF POINTS < 4 RESTART GAME ELSE ... REST OF CODE
-        if (currentScene == "Gallery Room 1")
-        {
-            SceneManager.LoadScene("Maze Scene 1");
-        }
-        else if(currentScene == "Gallery Room 2")
-        {
-            SceneManager.LoadScene("Maze Scene 2");
+        // Stop the timer
+        timerStopped = true;
 
-        }
-        else if(currentScene == "Gallery Room 3")
-        {
-            SceneManager.LoadScene("Maze Scene 3");
+        // Check if the player has accumulated enough points for the current scene
+        int requiredPoints = GetRequiredPointsForScene(currentScene);
 
-        }
-        else if(currentScene == "Maze Scene 1")
+        if (scenePoints.scenePoints < requiredPoints)
         {
-            SceneManager.LoadScene("Gallery Room 2");
+            // If the player hasn't accumulated enough points, reset points for the current scene
+            if (currentScene == "Maze Scene 1")
+                pointsSystem.SetPoints(0);
+            else if (currentScene == "Maze Scene 2")
+                pointsSystem.SetPoints(4);
+            else if (currentScene == "Maze Scene 3")
+                pointsSystem.SetPoints(8);
+
+            // Load the current scene
+            SceneManager.LoadScene(currentScene);
         }
-        else if (currentScene == "Maze Scene 2")
+        else
         {
-            SceneManager.LoadScene("Gallery Room 3");
+            // If the player has enough points, reset points for the next scene
+            int nextSceneRequiredPoints = GetRequiredPointsForScene(GetNextScene(currentScene));
+            pointsSystem.SetPoints(nextSceneRequiredPoints);
+
+            // Load the next scene
+            SceneManager.LoadScene(GetNextScene(currentScene));
         }
-        else if (currentScene == "Maze Scene 3")
-        {
-            SceneManager.LoadScene("Winning Scene");
-        }
-        //else
-        //{
-        //    return;
-        //}
-        //SceneManager.LoadScene("Maze Scene");
-        // Load the next scene when the timer is up
-        //SceneManager.LoadScene(scene);
     }
 
-    
+    int GetRequiredPointsForScene(string sceneName)
+    {
+        // Define the required points for each scene
+        switch (sceneName)
+        {
+            case "Maze Scene 1":
+                return 4;
+            case "Maze Scene 2":
+                return 8;
+            case "Maze Scene 3":
+                return 14;
+            default:
+                return 0; // Default to 0 points if scene not recognized
+        }
+    }
+
+    string GetNextScene(string currentScene)
+    {
+        // Define the next scene for each current scene
+        switch (currentScene)
+        {
+            case "Gallery Room 1":
+                return "Maze Scene 1";
+            case "Gallery Room 2":
+                return "Maze Scene 2";
+            case "Gallery Room 3":
+                return "Maze Scene 3";
+            case "Maze Scene 1":
+                return "Gallery Room 2";
+            case "Maze Scene 2":
+                return "Gallery Room 3";
+            case "Maze Scene 3":
+                return "Win Scene";
+            default:
+                return "Game Over Scene"; // Default to "Win Scene" if current scene not recognized
+        }
+    }
 }

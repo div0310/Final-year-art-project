@@ -11,7 +11,7 @@ public class PaintingInfo
     public Image imageUI;
     public TMP_Text[] hintTexts; // Array of hint texts
     public KeyCode displayKey = KeyCode.E;
-    public float range = 2f; // Adjust as needed
+    public float range = 2f; 
     public bool playerInRange = false;
 }
 
@@ -23,7 +23,7 @@ public class DisplayInformation : MonoBehaviour
     {
         foreach (PaintingInfo painting in paintings)
         {
-            // Make sure the image UI is initially disabled
+            //Check the image UI is initially disabled
             if (painting.imageUI != null)
             {
                 painting.imageUI.gameObject.SetActive(false);
@@ -57,7 +57,7 @@ public class DisplayInformation : MonoBehaviour
                 // Check if the display key is pressed
                 if (Input.GetKeyDown(painting.displayKey))
                 {
-                    // Toggle the image UI
+                    // Toggle image UI
                     if (painting.imageUI != null)
                     {
                         painting.imageUI.gameObject.SetActive(!painting.imageUI.gameObject.activeSelf);

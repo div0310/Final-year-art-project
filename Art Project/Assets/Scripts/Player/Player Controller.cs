@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public Animator playerAnim;
-    public HealthBar healthBar;
+    public HealthBarSystem healthBar;
     public int maxHealth = 100;
     public int currentHealth;
     bool isGuardCollidingPlayer;
@@ -23,12 +23,20 @@ public class PlayerController : MonoBehaviour
     bool _isMaze;
 
     public float recoilForce = 500f;
+    public float recoilForceMagnitude = 1.0f;
 
     private void Start()
     {
         playerRB = GetComponent<Rigidbody>();
-        healthBar.SetMaxHealth(maxHealth);
-        //_healthBarSliderScript = FindObjectOfType<HealthBarSliderScript>();
+        healthBar = FindObjectOfType<HealthBarSystem>();
+        // Ensure the health bar system persists between scenes
+        DontDestroyOnLoad(healthBar.gameObject);
+        // Set initial health
+        currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth);
+
+        //healthBar = GetComponent<HealthBar>();
+        //healthBar.SetMaxHealth(maxHealth);
         //_healthBarSliderScript.SetMaxHealth(health); // assign given health in inspector to slider.
         _isMaze = SceneManager.GetActiveScene().name.StartsWith("Maze");
 
@@ -71,16 +79,26 @@ public class PlayerController : MonoBehaviour
 
     void TakeDamage(Vector3 recoilDirection)
     {
-        playerRB.AddForce(recoilDirection * recoilForce);
-        currentHealth -= 10; // can set a threshold instead of 1.
+        // Calculate recoil force based on the recoilDirection and recoilForce
+        Vector3 recoilForce = recoilDirection.normalized * recoilForceMagnitude;
+
+        // Apply the recoil force to the player's Rigidbody
+        playerRB.AddForce(recoilForce);
+
+        // Decrease player's health
+        currentHealth -= 10;
+
+        //update Health
         healthBar.SetHealth(currentHealth);
 
-        if (currentHealth < 1)
+        // Check if player's health has reached zero
+        if (currentHealth <= 0)
         {
-            //implement restart game logic
+            // Implement game over or restart logic here
+            SceneManager.LoadScene("Game Over Scene");
         }
 
-        Debug.Log(currentHealth);
+        Debug.Log("Player took damage. Health: " + currentHealth);
     }
 
     void SetRotation(bool faceCamera)
