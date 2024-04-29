@@ -12,11 +12,9 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     bool isGuardCollidingPlayer;
-    //HealthBarSliderScript _healthBarSliderScript;
 
     public Rigidbody playerRB;
     public float walking_speed, sneakWalk_speed, oldWalking_speed, rotation_speed;
-    //public float sprint_speed;
     public float _playerTurnSpeed = 180f;
     public bool walking;//if player walking true or false
     public Transform playerTrans, modelTrans;
@@ -29,15 +27,14 @@ public class PlayerController : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody>();
         healthBar = FindObjectOfType<HealthBarSystem>();
-        // Ensure the health bar system persists between scenes
+
+        // make sure the health bar system is same between scenes
         DontDestroyOnLoad(healthBar.gameObject);
+
         // Set initial health
         currentHealth = maxHealth;
         healthBar.SetHealth(currentHealth);
 
-        //healthBar = GetComponent<HealthBar>();
-        //healthBar.SetMaxHealth(maxHealth);
-        //_healthBarSliderScript.SetMaxHealth(health); // assign given health in inspector to slider.
         _isMaze = SceneManager.GetActiveScene().name.StartsWith("Maze");
 
     }
@@ -46,24 +43,24 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Guard"))
         {
-            // Calculate the direction from the player to the guard
+            // calculate direction from the player to the guard
 
             Vector3 directionToGuard = collision.transform.position - transform.position;
             isGuardCollidingPlayer = true;
             Invoke(nameof(ResetCollisionFlag), 0.5f);
 
-            // Define recoil directions
+            // define recoil directions
             Vector3[] recoilDirections = { transform.forward, -transform.right, transform.right };
 
-            // Loop through each recoil direction
+            // loop through each recoil direction
             foreach (Vector3 recoilDirection in recoilDirections)
             {
-                // Check if the guard is in the specified direction relative to the player
+                // check if the guard is in the specified direction relative to the player
                 if (Vector3.Dot(directionToGuard, recoilDirection) > 0)
                 {
                     Debug.Log($"Guard is {(recoilDirection == transform.forward ? "in front" : recoilDirection == -transform.right ? "to the left" : "to the right")} of the player");
 
-                    // Apply recoil force in the opposite direction if it's a maze
+                    // apply recoil force in the opposite direction if it's a maze
                     Vector3 oppositeDirection = -recoilDirection;
                     Vector3 recoilForce = _isMaze ? Vector3.zero : oppositeDirection * 10;
 
@@ -79,28 +76,29 @@ public class PlayerController : MonoBehaviour
 
     void TakeDamage(Vector3 recoilDirection)
     {
-        // Calculate recoil force based on the recoilDirection and recoilForce
+        // calculate recoil force based on the recoilDirection and recoilForce
         Vector3 recoilForce = recoilDirection.normalized * recoilForceMagnitude;
 
-        // Apply the recoil force to the player's Rigidbody
+        // apply the recoil force to the player's Rigidbody
         playerRB.AddForce(recoilForce);
 
-        // Decrease player's health
+        // decrease player's health
         currentHealth -= 10;
 
         //update Health
         healthBar.SetHealth(currentHealth);
 
-        // Check if player's health has reached zero
+        // check if player's health has reached zero
         if (currentHealth <= 0)
         {
-            // Implement game over or restart logic here
+            // implement game over or restart logic here
             SceneManager.LoadScene("Game Over Scene");
         }
 
         Debug.Log("Player took damage. Health: " + currentHealth);
     }
 
+    //function for player rotation
     void SetRotation(bool faceCamera)
     {
         Vector3 cameraForward = Camera.main.transform.forward;
@@ -123,6 +121,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Player movement code
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.W))
@@ -131,14 +130,12 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetTrigger("Walk");
             playerAnim.ResetTrigger("Idle");
             walking = true;
-            //steps1.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
             playerAnim.ResetTrigger("Walk");
             playerAnim.SetTrigger("Idle");
             walking = false;
-            //steps1.SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -146,27 +143,22 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetTrigger("Walk");
             playerAnim.ResetTrigger("Idle");
             walking = true;
-
-            //steps1.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
             playerAnim.ResetTrigger("Walk");
             playerAnim.SetTrigger("Idle");
             walking = false;
-            //steps1.SetActive(false);
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
             playerAnim.SetTrigger("Sneak Walk");
             playerAnim.ResetTrigger("Idle");
-            //steps1.SetActive(true);
         }
         if (Input.GetKeyUp(KeyCode.Q))
         {
             playerAnim.ResetTrigger("Sneak Walk");
             playerAnim.SetTrigger("Idle");
-            //steps1.SetActive(false);
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -180,16 +172,12 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                //steps1.SetActive(false);
-                //steps2.SetActive(true);
                 walking_speed = walking_speed + rotation_speed;
                 playerAnim.SetTrigger("Slow Run");
                 playerAnim.ResetTrigger("Walk");
             }
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
-                //steps1.SetActive(true);
-                //steps2.SetActive(false);
                 walking_speed = oldWalking_speed;
                 playerAnim.ResetTrigger("Slow Run");
                 playerAnim.SetTrigger("Walk");

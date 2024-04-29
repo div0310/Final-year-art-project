@@ -7,14 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class TimerRoom : MonoBehaviour
 {
-    //INITIALIZE POINTSYSTEM HERE AND 
+    //INITIALIZE POINTSYSTEM , POINTS COUNTER AND HEALTHBAR SYSTEM 
     private PointsCounter scenePoints;
     private PointsSystem pointsSystem;
     private HealthBarSystem health;
     public float timeValue = 180f; // Total time in seconds
     public TMP_Text timeText;
     private float currentTime;
-    //public string nextScene;
     public string currentScene;
 
     private bool timerStopped = false; // Flag to indicate if the timer has been stopped
@@ -31,7 +30,6 @@ public class TimerRoom : MonoBehaviour
     {
         if (!timerStopped) // Check if the timer is running
         {
-            //IF POINTS <
             if (timeValue > 0)
             {
                 timeValue -= Time.deltaTime;
@@ -46,6 +44,7 @@ public class TimerRoom : MonoBehaviour
         }
     }
 
+    //FUNCTION that shows time using ui
     void DisplayTime(float timeToDisplay)
     {
         if (timeToDisplay < 0)
@@ -64,7 +63,7 @@ public class TimerRoom : MonoBehaviour
         // Stop the timer
         timerStopped = true;
 
-        // Check if the player has accumulated enough points for the current scene
+        // Check if player has accumulated enough points for the current scene
         int requiredPoints = GetRequiredPointsForScene(currentScene);
 
         if (scenePoints.scenePoints < requiredPoints)
@@ -125,7 +124,7 @@ public class TimerRoom : MonoBehaviour
             case "Maze Scene 3":
                 return "Win Scene";
             default:
-                return "Game Over Scene"; // Default to "Win Scene" if current scene not recognized
+                return "Game Over Scene"; // Default to "Game Over Scene" if current scene not recognized
         }
     }
 }

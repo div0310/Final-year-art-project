@@ -14,7 +14,7 @@ public class Questions : MonoBehaviour
     public Animator playerAnim;
 
 
-
+    //whwn player collides with coin, player movement is frozen and question appears
     void OnTriggerEnter(Collider other)
     {
         questionObject.SetActive(true);
@@ -43,8 +43,6 @@ public class Questions : MonoBehaviour
     {
         // Show correct text
         Debug.Log("CORRECT ANSWER!");
-        /*textBox.GetComponent<TMP_Text>().text = "CORRECT ANSWER!";
-        StartCoroutine(HideTextBoxAfterDelay(3f));*/
     }
 
     private IEnumerator HideTextBoxAfterDelay(float delay)

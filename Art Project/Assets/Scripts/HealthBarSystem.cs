@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class HealthBarSystem : MonoBehaviour
 {
+    //healthbar system to keep track of health between scenes
     string healthBarKey = "Health";
     public int CurrentHealth
     {

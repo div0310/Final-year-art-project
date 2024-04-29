@@ -9,12 +9,11 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject settingsScreen;
     public GameObject infoScreen;
-    // Start is called before the first frame update
 
     private void Awake()
     {
         infoScreen.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 0f;// timer is frozen
         gameIsPaused = true;
     }
 
@@ -37,7 +36,7 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+        Time.timeScale = 1f;// game restarts
         gameIsPaused = false;
     }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PointsSystem : MonoBehaviour
 {
+    //points system to keep track of points between scenes
     string pointsKey = "Points";
     public int CurrentPoints
     {
@@ -19,7 +20,6 @@ public class PointsSystem : MonoBehaviour
     {
         PlayerPrefs.SetInt(pointsKey, points);
     }
-    //UPDATE METHOD CHECK IF CURRENT POINTS >= 10 
-    //PLAY VICTORY SCENE
+    
    
 }

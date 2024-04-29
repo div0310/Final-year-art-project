@@ -20,7 +20,6 @@ public class SettingsScreen : MonoBehaviour
     public Slider masterSlider, musicSlider, sfxSlider;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         fullscreenToggle.isOn = Screen.fullScreen;
@@ -50,11 +49,6 @@ public class SettingsScreen : MonoBehaviour
         sfxLabel.text = Mathf.RoundToInt(sfxSlider.value + 80).ToString();//update volume on screen
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ResLeft()//resolution selection decreases
     {
@@ -80,10 +74,10 @@ public class SettingsScreen : MonoBehaviour
     {
         resolutionLabel.text = resolutions[selectedResolution].horizontal.ToString() + " x " + resolutions[selectedResolution].vertical.ToString();//convert to string
     }
+
+    //apply graphics values
     public void ApplyGraphics()
     {
-        //Screen.fullScreen = fullscreenToggle.isOn;
-
         Screen.SetResolution(resolutions[selectedResolution].horizontal, resolutions[selectedResolution].vertical, fullscreenToggle.isOn);
     }
 

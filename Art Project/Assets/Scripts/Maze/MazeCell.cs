@@ -21,12 +21,14 @@ public class MazeCell : MonoBehaviour
 
     public bool isVisited { get; private set; }
 
+    //mark cell as visited and hide unvisited cell
     public void Visit()
     {
         isVisited = true;
         _unvisitedBlock.SetActive(false);
     }
 
+    //clear individual cells
     public void ClearLeftWall()
     {
         _leftWall.SetActive(false);

@@ -10,6 +10,7 @@ public class MazeCellController : MonoBehaviour
     public bool hasEastWall;
     public bool hasWestWall;
 
+    //initialize cells position
     public MazeCellController(Vector3 position)
     {
         this.position = position;
@@ -21,11 +22,11 @@ public class MazeCellController : MonoBehaviour
 
     public bool HasWalkableArea()
     {
-        // Check for at least one open direction for walkable area
+        // check for at least one open direction for walkable area
         return !hasNorthWall || !hasSouthWall || !hasEastWall || !hasWestWall;
     }
 
-    // Methods to clear specific walls (implement based on your cell visuals)
+    // methods to clear specific walls 
     public void ClearNorthWall() { hasNorthWall = false; }
     public void ClearSouthWall() { hasSouthWall = false; }
     public void ClearEastWall() { hasEastWall = false; }

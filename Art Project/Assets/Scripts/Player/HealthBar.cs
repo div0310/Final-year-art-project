@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    //script for healthbar visuals
     public Slider slider;
     public Gradient gradient;
     public Image fill;

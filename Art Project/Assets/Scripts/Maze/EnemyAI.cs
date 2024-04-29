@@ -4,20 +4,28 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
+public enum EnemyState
+{
+    Idle,
+    Patrol,
+    Chase,
+    Attack
+}
+
 public class EnemyAI : MonoBehaviour
 {
     public List<Transform> patrolPoints;
-    public Transform player; 
+    public Transform player;
     public float chaseRange = 6; // Distance within which the enemy starts chasing the player
-    private int currentPatrolIndex;
-    private Transform targetPatrolPoint;
-    private NavMeshAgent navMeshAgent;
-    private bool isChasing = false;
     public float attackRange = 1;
     public float chaseCooldownTime = 5f;
-    public float currentCooldownTime = 0;
-    public bool isOnCooldown = false;
-    Animator _animator;
+    private float currentCooldownTime = 0;
+    private bool isOnCooldown = false;
+    private EnemyState currentState = EnemyState.Idle;
+    private NavMeshAgent navMeshAgent;
+    private Animator _animator;
+    private int currentPatrolIndex;
+    private Transform targetPatrolPoint;
 
     void Start()
     {
@@ -29,7 +37,6 @@ public class EnemyAI : MonoBehaviour
 
     private void GetNextPatrolPoint()
     {
-        // Ensure the next index is different from the current one
         int nextIndex = currentPatrolIndex;
         while (nextIndex == currentPatrolIndex)
         {
@@ -48,67 +55,97 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        // Calculate the distance between the enemy and the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        if (isOnCooldown)//enemy stops 
+        switch (currentState)
         {
-            currentCooldownTime -= Time.deltaTime;
-            if(currentCooldownTime < 4)
-            {
-                _animator.Play("New anim");
-            }
-            if (currentCooldownTime <= 0) 
-            {
-                isOnCooldown = false;
-            }
-        }
-        else
-        {
-            // If the player is within the chase range, start chasing the player
-            if (distanceToPlayer <= chaseRange && distanceToPlayer > attackRange)
-            {
+            case EnemyState.Idle:
+                // Transition to patrol if not already patrolling
+                currentState = EnemyState.Patrol;
+                break;
 
-                isChasing = true;
+            case EnemyState.Patrol:
+                if (distanceToPlayer <= chaseRange)
+                {
+                    currentState = EnemyState.Chase;
+                    break;
+                }
 
-                bool isMaze = SceneManager.GetActiveScene().name.StartsWith("Maze");
-                navMeshAgent.speed = isMaze ? 1.1f : 2f;
-                // code above will set the speed 1.1 in maze, 2 is too much for this scene, rest of the sceenes, it works fine.
+                if (navMeshAgent.remainingDistance < 0.1f)
+                {
+                    GetNextPatrolPoint();
+                }
+                break;
 
-                navMeshAgent.angularSpeed = 360;
-                _animator.Play("Run_F 0");
+            case EnemyState.Chase:
+                if (distanceToPlayer <= attackRange)
+                {
+                    currentState = EnemyState.Attack;
+                    break;
+                }
+
+                if (distanceToPlayer > chaseRange)
+                {
+                    currentState = EnemyState.Patrol;
+                    GetNextPatrolPoint();
+                }
+
                 SetDestination(player.position);
-            }
-            else if(distanceToPlayer <= attackRange)//when enemy reaches the player 
-            {
-                bool isMaze = SceneManager.GetActiveScene().name.StartsWith("Maze");
-                navMeshAgent.speed = isMaze ? 1.1f : 2f;
-                // code above will set the speed 1.1 in maze, 2 is too much for this scene, rest of the sceenes, it works fine.
+                break;
 
-                navMeshAgent.angularSpeed = 360;
-                _animator.Play("Victory");
-                currentCooldownTime = chaseCooldownTime; //restarting cooldown time
-                isOnCooldown = true;
-                
-            }
-            else
-            {
-                // If not chasing, check if the enemy has reached the target patrol point
-                if (!isChasing && navMeshAgent.remainingDistance < 0.1f)
+            case EnemyState.Attack:
+                if (!isOnCooldown)
                 {
-                    // Move to the next patrol point
-                    GetNextPatrolPoint();
+                    _animator.Play("Punching");
+
+
+                    currentCooldownTime = chaseCooldownTime;
+                    isOnCooldown = true;
+                    // attack logic here
+
                 }
-                else if (isChasing && distanceToPlayer > chaseRange)
+                else
                 {
-                    // If chasing and player goes out of range, stop chasing and go back to patrolling
-                    isChasing = false;
-                    _animator.Play("Walk_F");
-                    navMeshAgent.angularSpeed = 120;
-                    GetNextPatrolPoint();
+                    currentCooldownTime -= Time.deltaTime;
+                    if (currentCooldownTime <= 0)
+                    {
+                        isOnCooldown = false;
+                    }
                 }
-            }
+
+                if (distanceToPlayer > attackRange)
+                {
+                    currentState = EnemyState.Chase;
+                }
+                break;
         }
-        
+
+        UpdateAnimation();
+    }
+
+    private void UpdateAnimation()
+    {
+        switch (currentState)
+        {
+            case EnemyState.Idle:
+                // Add idle animation
+                _animator.Play("Pose_Idle");
+                break;
+            case EnemyState.Patrol:
+                // Add patrol animation
+                _animator.Play("Walk_F");
+
+                break;
+            case EnemyState.Chase:
+                // Add chase animation
+                _animator.Play("Run_F 0");
+
+                break;
+            case EnemyState.Attack:
+                // Add attack animation
+                _animator.Play("Punching");
+
+                break;
+        }
     }
 }

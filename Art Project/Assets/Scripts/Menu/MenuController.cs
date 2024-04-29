@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-//using System.Security.Cryptography;
 
 public class MenuController : MonoBehaviour
 {
     public string _newGameLevel;
     public GameObject settingsScreen;
-    //public Button startGame;
+
     public void NewGameLevel()
     {
         SceneManager.LoadScene(_newGameLevel);

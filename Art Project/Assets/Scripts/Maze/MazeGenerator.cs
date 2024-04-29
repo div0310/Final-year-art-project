@@ -1,3 +1,4 @@
+using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using UnityEngine.AI;
 
 public class MazeGenerator : MonoBehaviour
 {
+    // reference to the prefab used to instantiate maze cells
     [SerializeField]
     private MazeCell _mazeCellPrefab;
 
@@ -16,53 +18,42 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField]
     private int _mazeDepth;
 
-    //[SerializeField]
-    //private GameObject _coinPrefab;
-
-    //[SerializeField]
-    //private GameObject _enemyPrefab;
-
+    //2D array to store the maze grid
     private MazeCell[,] _mazeGrid;
     public NavMeshSurface _surface;
 
 
     void Start()
     {
+        //initialize maze grid
         _mazeGrid = new MazeCell[_mazeWidth, _mazeDepth];
 
+        //instantiate maze cells in a grid pattern
         for (int x = 0; x < _mazeWidth; x++)
         {
             for (int z = 0; z < _mazeDepth; z++)
             {
                 _mazeGrid[x, z] = Instantiate(_mazeCellPrefab, new Vector3(x, 0, z), Quaternion.identity);
 
-
-                //Instantiate a _coinPrefab with 10% chance
-                //if (Random.Range(0f, 1f) < 0.1f)
-                //{
-                //    Instantiate(_coinPrefab, new Vector3(x, 0.177f, z), Quaternion.identity);
-                //}
-                //else if (Random.Range(0f, 1f) < 0.02f)
-                //{
-                //    Instantiate(_enemyPrefab, new Vector3(x, 0, z), Quaternion.identity); //instantiate enemies
-                //}
-
             }
         }
 
-
+        //generate maze
         GenerateMaze(null, _mazeGrid[0, 0]);
 
         _surface.BuildNavMesh();
 
-        //GetComponent<NavMeshSurface>().BuildNavMesh(); //build navmesh
     }
-
+    // method to generate the maze
     private void GenerateMaze(MazeCell previousCell, MazeCell currentCell)
     {
+        //mark current cell as visited
         currentCell.Visit();
+
+        //remove walls between the current and previous cells
         ClearWalls(previousCell, currentCell);
 
+        //get next unvisited cell
         MazeCell nextCell;
 
         do
@@ -71,11 +62,12 @@ public class MazeGenerator : MonoBehaviour
 
             if (nextCell != null)
             {
+                //recursively generate maze starting from the next cell
                 GenerateMaze(currentCell, nextCell);
             }
         } while (nextCell != null);
     }
-
+    //method to get next unvisited cell adjacent to the current cell
     private MazeCell GetNextUnvisitedCell(MazeCell currentCell)
     {
         var unvisitedCells = GetUnvisitedCells(currentCell);
@@ -83,6 +75,7 @@ public class MazeGenerator : MonoBehaviour
         return unvisitedCells.OrderBy(_ => Random.Range(1, 10)).FirstOrDefault();
     }
 
+    //method to get unvisited neighboring cells of the current cell
     private IEnumerable<MazeCell> GetUnvisitedCells(MazeCell currentCell)
     {
         int x = (int)currentCell.transform.position.x;
@@ -129,6 +122,7 @@ public class MazeGenerator : MonoBehaviour
         }
     }
 
+    //method to clear walls between two cells that are next to each other
     private void ClearWalls(MazeCell previousCell, MazeCell currentCell)
     {
         if (previousCell == null)

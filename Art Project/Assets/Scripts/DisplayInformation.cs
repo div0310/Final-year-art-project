@@ -77,6 +77,7 @@ public class DisplayInformation : MonoBehaviour
         }
     }
 
+    //player enters collider range 
     private void OnTriggerEnter(Collider other)
     {
         foreach (PaintingInfo painting in paintings)
@@ -88,6 +89,7 @@ public class DisplayInformation : MonoBehaviour
         }
     }
 
+    //player exits collider range 
     private void OnTriggerExit(Collider other)
     {
         foreach (PaintingInfo painting in paintings)
