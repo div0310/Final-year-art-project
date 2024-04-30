@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class TimerRoom : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class TimerRoom : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("Started scene");
         currentTime = timeValue;
         scenePoints = FindObjectOfType<PointsCounter>(); // Initialize scenePoints
         pointsSystem = FindObjectOfType<PointsSystem>(); // Initialize pointsSystem
@@ -28,8 +30,13 @@ public class TimerRoom : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("Points " + pointsSystem.CurrentPoints);
+
+        
+
         if (!timerStopped) // Check if the timer is running
         {
+
             if (timeValue > 0)
             {
                 timeValue -= Time.deltaTime;
@@ -37,10 +44,74 @@ public class TimerRoom : MonoBehaviour
             else
             {
                 timeValue = 0;
-                LoadNextScene();
-                //change scene
             }
             DisplayTime(timeValue);
+        }
+        
+        // Check if player has accumulated enough points for the current scene
+        int requiredPoints = GetRequiredPointsForScene(currentScene);
+        Debug.Log("Required points " + requiredPoints);
+        if (pointsSystem.CurrentPoints < requiredPoints && timeValue > 0 && timeValue < 1)
+        {
+            Debug.Log("Time value is " + timeValue);
+
+            //Load current scene
+            SceneManager.LoadScene(currentScene);
+            // If the player hasn't accumulated enough points, reset points for the current scene
+            if (currentScene == "Maze Scene 1")
+                pointsSystem.CurrentPoints = 0;
+            else if (currentScene == "Maze Scene 2")
+                pointsSystem.CurrentPoints= 4;
+            else if (currentScene == "Maze Scene 3")
+                pointsSystem.CurrentPoints = 8;
+            else if (currentScene == "Gallery Room 2")
+                pointsSystem.CurrentPoints = 4;
+            else if (currentScene == "Gallery Room 3")
+                pointsSystem.CurrentPoints = 8;
+
+            // extract numeric part from current text and update only the points
+            string currentText = scenePoints.pointsText.text;
+            int startIndex = currentText.IndexOf(':') + 1; // find the index of ':' and add 1 to get the start index of the numeric part
+            string numericPart = currentText.Substring(startIndex).Trim(); // extract and trim the numeric part
+            int currentPoints = int.Parse(numericPart); // convert the numeric part to an integer
+
+            // Update the text ui element with the new points
+            scenePoints.pointsText.text = currentText.Replace(currentPoints.ToString(), pointsSystem.CurrentPoints.ToString());
+
+        }
+        else if(pointsSystem.CurrentPoints == requiredPoints)
+        {
+
+            if(requiredPoints > 0)
+            {
+                SceneManager.LoadScene(GetNextScene(currentScene));
+                Debug.Log("Moved to next scene");
+            }
+            else
+            {
+                Debug.Log("Else entered");
+
+                if (currentScene == "Maze Scene 1")
+                    pointsSystem.CurrentPoints = 0;
+                else if (currentScene == "Maze Scene 2")
+                    pointsSystem.CurrentPoints = 4;
+                else if (currentScene == "Maze Scene 3")
+                    pointsSystem.CurrentPoints = 8;
+                else if (currentScene == "Gallery Room 2")
+                    pointsSystem.CurrentPoints = 4;
+                else if (currentScene == "Gallery Room 3")
+                    pointsSystem.CurrentPoints = 8;
+
+                // extract numeric part from current text and update only the points
+                string currentText = scenePoints.pointsText.text;
+                int startIndex = currentText.IndexOf(':') + 1; // find the index of ':' and add 1 to get the start index of the numeric part
+                string numericPart = currentText.Substring(startIndex).Trim(); // extract and trim the numeric part
+                int currentPoints = int.Parse(numericPart); // convert the numeric part to an integer
+
+                // Update the text ui element with the new points
+                scenePoints.pointsText.text = currentText.Replace(currentPoints.ToString(), pointsSystem.CurrentPoints.ToString());
+
+            }
         }
     }
 
@@ -58,40 +129,10 @@ public class TimerRoom : MonoBehaviour
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    void LoadNextScene()
-    {
-        // Stop the timer
-        timerStopped = true;
-
-        // Check if player has accumulated enough points for the current scene
-        int requiredPoints = GetRequiredPointsForScene(currentScene);
-
-        if (scenePoints.scenePoints < requiredPoints)
-        {
-            // If the player hasn't accumulated enough points, reset points for the current scene
-            if (currentScene == "Maze Scene 1")
-                pointsSystem.SetPoints(0);
-            else if (currentScene == "Maze Scene 2")
-                pointsSystem.SetPoints(4);
-            else if (currentScene == "Maze Scene 3")
-                pointsSystem.SetPoints(8);
-
-            // Load the current scene
-            SceneManager.LoadScene(currentScene);
-        }
-        else
-        {
-            // If the player has enough points, reset points for the next scene
-            int nextSceneRequiredPoints = GetRequiredPointsForScene(GetNextScene(currentScene));
-            pointsSystem.SetPoints(nextSceneRequiredPoints);
-
-            // Load the next scene
-            SceneManager.LoadScene(GetNextScene(currentScene));
-        }
-    }
 
     int GetRequiredPointsForScene(string sceneName)
     {
+        Debug.Log("Get required points for scene start");
         // Define the required points for each scene
         switch (sceneName)
         {
@@ -108,6 +149,9 @@ public class TimerRoom : MonoBehaviour
 
     string GetNextScene(string currentScene)
     {
+        Debug.Log("Getting next scene");
+
+        scenePoints.scenePoints = 0;
         // Define the next scene for each current scene
         switch (currentScene)
         {
@@ -125,6 +169,9 @@ public class TimerRoom : MonoBehaviour
                 return "Win Scene";
             default:
                 return "Game Over Scene"; // Default to "Game Over Scene" if current scene not recognized
+
         }
+
+
     }
 }

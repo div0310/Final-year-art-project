@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public Animator playerAnim;
-    public HealthBarSystem healthBar;
+    public HealthBar healthBar;
     public int maxHealth = 100;
     public int currentHealth;
     bool isGuardCollidingPlayer;
@@ -26,9 +26,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerRB = GetComponent<Rigidbody>();
-        healthBar = FindObjectOfType<HealthBarSystem>();
+        healthBar = FindObjectOfType<HealthBar>();
 
-        // make sure the health bar system is same between scenes
+        // make sure the health bar is same between scenes
         DontDestroyOnLoad(healthBar.gameObject);
 
         // Set initial health

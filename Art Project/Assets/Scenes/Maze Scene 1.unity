@@ -357,7 +357,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 300294544}
-  - component: {fileID: 300294543}
+  - component: {fileID: 300294545}
   m_Layer: 0
   m_Name: HealthBarSystem
   m_TagString: Untagged
@@ -365,18 +365,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &300294543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300294542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f60adcd28c5c624bafe4e60b8af6880, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &300294544
 Transform:
   m_ObjectHideFlags: 0
@@ -392,6 +380,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &300294545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300294542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022a185aee167ed44b34edca76898d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 257135429}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 0.93725497, g: 0.050980397, b: 0.10980393, a: 1}
+    key1: {r: 0.9433962, g: 0.9205818, b: 0.18244925, a: 1}
+    key2: {r: 0.13163051, g: 0.9622642, b: 0.19796745, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 19661
+    ctime1: 39321
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  fill: {fileID: 1259953819}
 --- !u!1 &352779986 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6516450791642357684, guid: 9ed9c377418208845a769a8cad1ef907, type: 3}
@@ -926,9 +958,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13d4a0304fad2a4a95e954dd0285e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 100
+  timeValue: 80
   timeText: {fileID: 760677356}
-  currentScene: 
+  currentScene: Maze Scene 1
 --- !u!114 &760677356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1481,6 +1513,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5060855496101468773, guid: eeb6171be66959d4593801c58b288ba1, type: 3}
   m_PrefabInstance: {fileID: 1154450564427592948}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1259953819 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 568489150514596638, guid: 67b2be1b7e5fcdd44813a91b935b2398, type: 3}
+  m_PrefabInstance: {fileID: 185863752}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1315349187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2569,7 +2612,7 @@ PrefabInstance:
     - target: {fileID: 4320517929187983265, guid: 9ed9c377418208845a769a8cad1ef907, type: 3}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 300294543}
+      objectReference: {fileID: 0}
     - target: {fileID: 4320517929187983265, guid: 9ed9c377418208845a769a8cad1ef907, type: 3}
       propertyPath: walking_speed
       value: 50
@@ -9112,7 +9155,6 @@ SceneRoots:
   - {fileID: 1791779302}
   - {fileID: 2139361976}
   - {fileID: 8004966596282756658}
-  - {fileID: 2060467787}
   - {fileID: 753776327}
   - {fileID: 971720231857763557}
   - {fileID: 8771565225048660970}
@@ -9125,3 +9167,4 @@ SceneRoots:
   - {fileID: 300294544}
   - {fileID: 2840414451629248462}
   - {fileID: 7366503164117896595}
+  - {fileID: 2060467787}
