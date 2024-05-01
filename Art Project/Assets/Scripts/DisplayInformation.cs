@@ -31,6 +31,7 @@ public class DisplayInformation : MonoBehaviour
             // Disable hint texts initially
             foreach (TMP_Text hintText in painting.hintTexts)
             {
+                Debug.Log("Hide hint text");
                 if (hintText != null)
                 {
                     hintText.gameObject.SetActive(false);
@@ -46,6 +47,8 @@ public class DisplayInformation : MonoBehaviour
             // Check if the player is in range of this painting and display the hint text
             if (painting.playerInRange)
             {
+                Debug.Log("Player is in range");
+
                 foreach (TMP_Text hintText in painting.hintTexts)
                 {
                     if (hintText != null)
@@ -57,6 +60,8 @@ public class DisplayInformation : MonoBehaviour
                 // Check if the display key is pressed
                 if (Input.GetKeyDown(painting.displayKey))
                 {
+                    Debug.Log("E is being pressed");
+
                     // Toggle image UI
                     if (painting.imageUI != null)
                     {
@@ -82,7 +87,7 @@ public class DisplayInformation : MonoBehaviour
     {
         foreach (PaintingInfo painting in paintings)
         {
-            if (other.CompareTag("Player") && other.gameObject == painting.paintingObject)
+            if (other.CompareTag("Player") && other.gameObject == painting.paintingObject.GetComponent<Collider>().gameObject)
             {
                 painting.playerInRange = true;
             }
@@ -94,7 +99,7 @@ public class DisplayInformation : MonoBehaviour
     {
         foreach (PaintingInfo painting in paintings)
         {
-            if (other.CompareTag("Player") && other.gameObject == painting.paintingObject)
+            if (other.CompareTag("Player") && other.gameObject == painting.paintingObject.GetComponent<Collider>().gameObject)
             {
                 painting.playerInRange = false;
             }

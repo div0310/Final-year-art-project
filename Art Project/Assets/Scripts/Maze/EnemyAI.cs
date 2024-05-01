@@ -61,7 +61,7 @@ public class EnemyAI : MonoBehaviour
         {
             case EnemyState.Idle:
                 // Transition to patrol if not already patrolling
-                currentState = EnemyState.Patrol;
+                currentState = EnemyState.Patrol; 
                 break;
 
             case EnemyState.Patrol:

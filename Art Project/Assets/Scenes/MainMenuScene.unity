@@ -2689,7 +2689,7 @@ MonoBehaviour:
     runs out!\n\n Avoid the guards in the maze levels whilst collecting coins and
     answering questions.\n Make sure to answer all the questions before the timer
     runs out!\n 1 correct answer = 1 point\n\n Use  'W A S D'  KEYS TO MOVE AROUND 
-    \n\n There are 3 art gallery rooms, 3 maze levels and 15 questions in total.\n
+    \n\n There are 3 art gallery rooms, 3 maze levels and 14 questions in total.\n
     You win the game if you answer all the questions correctly.\n You lose the game
     if your health reaches 0."
   m_isRightToLeft: 0
