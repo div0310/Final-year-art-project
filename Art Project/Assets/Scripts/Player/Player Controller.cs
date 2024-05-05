@@ -9,9 +9,10 @@ public class PlayerController : MonoBehaviour
 {
     public Animator playerAnim;
     public HealthBar healthBar;
-    public int maxHealth = 100;
+    public HealthBarSystem healthBarSystem;
     public int currentHealth;
     bool isGuardCollidingPlayer;
+
 
     public Rigidbody playerRB;
     public float walking_speed, sneakWalk_speed, oldWalking_speed, rotation_speed;
@@ -27,14 +28,13 @@ public class PlayerController : MonoBehaviour
     {
         playerRB = GetComponent<Rigidbody>();
         healthBar = FindObjectOfType<HealthBar>();
+        healthBarSystem = FindObjectOfType<HealthBarSystem>();
 
-        // make sure the health bar is same between scenes
-        DontDestroyOnLoad(healthBar.gameObject);
+
 
         // Set initial health
-        currentHealth = maxHealth;
-        healthBar.SetHealth(currentHealth);
-
+        currentHealth = healthBarSystem.CurrentHealth;
+        Debug.Log("Player controller current health " + currentHealth);
         _isMaze = SceneManager.GetActiveScene().name.StartsWith("Maze");
 
     }
@@ -88,13 +88,7 @@ public class PlayerController : MonoBehaviour
         //update Health
         healthBar.SetHealth(currentHealth);
 
-        // check if player's health has reached zero
-        if (currentHealth <= 0)
-        {
-            // implement game over or restart logic here
-            SceneManager.LoadScene("Game Over Scene");
-        }
-
+        
         Debug.Log("Player took damage. Health: " + currentHealth);
     }
 
@@ -182,6 +176,11 @@ public class PlayerController : MonoBehaviour
                 playerAnim.ResetTrigger("Slow Run");
                 playerAnim.SetTrigger("Walk");
             }
+        }
+
+        if (currentHealth == 0)
+        {
+            SceneManager.LoadScene("Game Over Scene");
         }
     }
 }

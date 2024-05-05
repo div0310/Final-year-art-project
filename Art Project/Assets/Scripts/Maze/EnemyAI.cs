@@ -69,7 +69,7 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case EnemyState.Patrol:
-                if (distanceToPlayer <= chaseRange && IsPlayerInSight())
+                if (distanceToPlayer <= chaseRange)
                 {
                     currentState = EnemyState.Chase;
                     break;
@@ -154,36 +154,36 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private bool IsPlayerInSight()
-    {
-        Debug.Log("Player in sight");
-        // Calculate direction to the player
-        Vector3 directionToPlayer = player.position - transform.position;
+    //private bool IsPlayerInSight()
+    //{
+    //    Debug.Log("Player in sight");
+    //    // Calculate direction to the player
+    //    Vector3 directionToPlayer = player.position - transform.position;
 
-        // Check if the player is within sight range
-        if (directionToPlayer.magnitude <= sightRange)
-        {
-            RaycastHit hit;
-            // Create a layer mask to ignore certain layers (e.g., the layer of maze walls)
-            LayerMask layerMask = ~LayerMask.GetMask("NavMesh");
+    //    // Check if the player is within sight range
+    //    if (directionToPlayer.magnitude <= sightRange)
+    //    {
+    //        RaycastHit hit;
+    //        // Create a layer mask to ignore certain layers (e.g., the layer of maze walls)
+    //        LayerMask layerMask = ~LayerMask.GetMask("NavMesh");
 
-            // Perform a raycast with the specified layer mask
-            if (Physics.Raycast(transform.position, directionToPlayer, out hit, sightRange, layerMask))
-            {
-                // If the raycast hits something other than the player, return false
-                if (hit.transform != player)
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                // If the raycast doesn't hit anything, return true (player is in sight)
-                return true;
-            }
-        }
+    //        // Perform a raycast with the specified layer mask
+    //        if (Physics.Raycast(transform.position, directionToPlayer, out hit, sightRange, layerMask))
+    //        {
+    //            // If the raycast hits something other than the player, return false
+    //            if (hit.transform != player)
+    //            {
+    //                return false;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            // If the raycast doesn't hit anything, return true (player is in sight)
+    //            return true;
+    //        }
+    //    }
 
-        // Player not detected within sight range or obstructed by obstacles
-        return false;
-    }
+    //    // Player not detected within sight range or obstructed by obstacles
+    //    return false;
+    //}
 }

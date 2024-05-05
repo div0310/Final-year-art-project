@@ -20,10 +20,7 @@ public class HealthBarSystem : MonoBehaviour
     public void SetHealth(int health)
     {
         PlayerPrefs.SetInt(healthBarKey, health);
-        if (CurrentHealth <= 0)
-        {
-            SceneManager.LoadScene("Game Over Scene");
-        }
+       
     }
 
 

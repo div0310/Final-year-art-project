@@ -12,7 +12,7 @@ public class VisionCone : MonoBehaviour
     public int visionConeResolution = 120;//the vision cone will be made up of triangles, the higher this value is the more visually aesthetic the vision cone will be
     Mesh visionConeMesh;
     MeshFilter meshFilter_;
-   
+
     void Start()
     {
         transform.AddComponent<MeshRenderer>().material = VisionConeMaterial;

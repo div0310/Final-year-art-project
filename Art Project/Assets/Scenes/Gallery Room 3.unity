@@ -8903,6 +8903,18 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 4584059535668470286, guid: 1aa58377e51ebf5479bcc4bb63b916a8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584059535668470286, guid: 1aa58377e51ebf5479bcc4bb63b916a8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 4584059535668470286, guid: 1aa58377e51ebf5479bcc4bb63b916a8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.0000076293945
+      objectReference: {fileID: 0}
     - target: {fileID: 7405131302384700174, guid: 1aa58377e51ebf5479bcc4bb63b916a8, type: 3}
       propertyPath: m_text
       value: The Renaissance art gallery room
