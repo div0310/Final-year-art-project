@@ -7,16 +7,13 @@ using TMPro;
 public class PointsCounter : MonoBehaviour
 {
     public TMP_Text pointsText;
-    public int scenePoints = 0;//to check if player has reached points
 
-    public int points = 0;
+    public int points;
     PointsSystem pointSystem;//initialize pointsystem
 
     private void Start()
     {
         pointSystem = FindObjectOfType<PointsSystem>();
-        PlayerPrefs.DeleteAll();
-        pointSystem.CurrentPoints = 0;
         points = pointSystem.CurrentPoints; //save points in integer 
 
         // extract the numeric part from current text and update only the points
@@ -27,11 +24,13 @@ public class PointsCounter : MonoBehaviour
 
         // Update the text ui element with the new points
         pointsText.text = currentText.Replace(currentPoints.ToString(), points.ToString());
+
+        Debug.Log("START POINT COUNTER Points " + points);
+        Debug.Log("START POINT COUNTER Current Points " + pointSystem.CurrentPoints);
     }
     public void UpdatePointsText()
     {
         points++;
-        scenePoints++;
         // extract numeric part from current text and update only the points
         string currentText = pointsText.text;
         int startIndex = currentText.IndexOf(':') + 1; // find the index of ':' and add 1 to get the start index of the numeric part
@@ -43,7 +42,11 @@ public class PointsCounter : MonoBehaviour
 
         //pointSystem.SetPoints(points);//updates value in points system
         pointSystem.CurrentPoints = points;
+        pointSystem.SetPoints(points);
+
+        Debug.Log("UPDATE POINT COUNTER Points " + points);
+        Debug.Log("UPDATE POINT COUNTER Current Points " + pointSystem.CurrentPoints);
     }
 
-    
+
 }

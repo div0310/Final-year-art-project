@@ -16,6 +16,7 @@ public class EnemyAI : MonoBehaviour
 {
     public List<Transform> patrolPoints;
     public Transform player;
+    public float sightRange = 10;
     public float chaseRange = 6; // Distance within which the enemy starts chasing the player
     public float attackRange = 1;
     public float chaseCooldownTime = 5f;
@@ -26,6 +27,9 @@ public class EnemyAI : MonoBehaviour
     private Animator _animator;
     private int currentPatrolIndex;
     private Transform targetPatrolPoint;
+
+    //private float idleTimer = 0f;
+    //float idleDuration = 5f;
 
     void Start()
     {
@@ -65,7 +69,7 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case EnemyState.Patrol:
-                if (distanceToPlayer <= chaseRange)
+                if (distanceToPlayer <= chaseRange && IsPlayerInSight())
                 {
                     currentState = EnemyState.Chase;
                     break;
@@ -73,6 +77,7 @@ public class EnemyAI : MonoBehaviour
 
                 if (navMeshAgent.remainingDistance < 0.1f)
                 {
+                   
                     GetNextPatrolPoint();
                 }
                 break;
@@ -147,5 +152,38 @@ public class EnemyAI : MonoBehaviour
 
                 break;
         }
+    }
+
+    private bool IsPlayerInSight()
+    {
+        Debug.Log("Player in sight");
+        // Calculate direction to the player
+        Vector3 directionToPlayer = player.position - transform.position;
+
+        // Check if the player is within sight range
+        if (directionToPlayer.magnitude <= sightRange)
+        {
+            RaycastHit hit;
+            // Create a layer mask to ignore certain layers (e.g., the layer of maze walls)
+            LayerMask layerMask = ~LayerMask.GetMask("NavMesh");
+
+            // Perform a raycast with the specified layer mask
+            if (Physics.Raycast(transform.position, directionToPlayer, out hit, sightRange, layerMask))
+            {
+                // If the raycast hits something other than the player, return false
+                if (hit.transform != player)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                // If the raycast doesn't hit anything, return true (player is in sight)
+                return true;
+            }
+        }
+
+        // Player not detected within sight range or obstructed by obstacles
+        return false;
     }
 }
