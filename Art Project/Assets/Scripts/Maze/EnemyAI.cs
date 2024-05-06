@@ -20,6 +20,9 @@ public class EnemyAI : MonoBehaviour
     public float chaseRange = 6; // Distance within which the enemy starts chasing the player
     public float attackRange = 1;
     public float chaseCooldownTime = 5f;
+    public float patrolCooldownTime = 5f;
+    private float patrolCurrentCooldownTime = 0;
+    private bool isOnCooldownPatrol = false;
     private float currentCooldownTime = 0;
     private bool isOnCooldown = false;
     private EnemyState currentState = EnemyState.Idle;
@@ -28,6 +31,8 @@ public class EnemyAI : MonoBehaviour
     private int currentPatrolIndex;
     private Transform targetPatrolPoint;
 
+    public FieldOfView fieldOfView;
+
     //private float idleTimer = 0f;
     //float idleDuration = 5f;
 
@@ -35,6 +40,8 @@ public class EnemyAI : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+
+        fieldOfView = FindObjectOfType<FieldOfView>();
 
         GetNextPatrolPoint();
     }
@@ -65,11 +72,11 @@ public class EnemyAI : MonoBehaviour
         {
             case EnemyState.Idle:
                 // Transition to patrol if not already patrolling
-                currentState = EnemyState.Patrol; 
+                currentState = EnemyState.Patrol;
                 break;
 
             case EnemyState.Patrol:
-                if (distanceToPlayer <= chaseRange)
+                if (distanceToPlayer <= chaseRange && fieldOfView.canSeePlayer)
                 {
                     currentState = EnemyState.Chase;
                     break;
@@ -77,23 +84,44 @@ public class EnemyAI : MonoBehaviour
 
                 if (navMeshAgent.remainingDistance < 0.1f)
                 {
-                   
+
                     GetNextPatrolPoint();
                 }
                 break;
 
             case EnemyState.Chase:
-                if (distanceToPlayer <= attackRange)
+                if (!isOnCooldownPatrol)
                 {
-                    currentState = EnemyState.Attack;
-                    break;
-                }
 
-                if (distanceToPlayer > chaseRange)
-                {
-                    currentState = EnemyState.Patrol;
-                    GetNextPatrolPoint();
+
+                    if (distanceToPlayer <= attackRange && fieldOfView.canSeePlayer)//go back to patrol when enemy cant see player or player is not in chase range
+                    {
+
+                        currentState = EnemyState.Attack;
+                        break;
+                    }
+
+                    if (distanceToPlayer > chaseRange || !fieldOfView.canSeePlayer)//go back to patrol when enemy cant see player or player is not in chase range
+                    {
+                        patrolCurrentCooldownTime = patrolCooldownTime;
+
+                        isOnCooldownPatrol = true;
+                        currentState = EnemyState.Patrol;
+                        GetNextPatrolPoint();
+                    }
+                    
+                  
                 }
+                else
+                {
+                    patrolCurrentCooldownTime -= Time.deltaTime;
+                    if (patrolCurrentCooldownTime <= 0)
+                    {
+                        isOnCooldownPatrol = false;
+                    }
+                }
+        
+                
 
                 SetDestination(player.position);
                 break;
@@ -118,7 +146,7 @@ public class EnemyAI : MonoBehaviour
                     }
                 }
 
-                if (distanceToPlayer > attackRange)
+                if (distanceToPlayer > attackRange || !fieldOfView.canSeePlayer)
                 {
                     currentState = EnemyState.Chase;
                 }

@@ -5162,11 +5162,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7721542885623151093}
   - {fileID: 1542564741}
   - {fileID: 1077377878}
-  - {fileID: 8953799788656784424}
-  - {fileID: 2032435552892599570}
-  - {fileID: 7721542885623151093}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6210,7 +6208,7 @@ GameObject:
   - component: {fileID: 907636205}
   - component: {fileID: 907636204}
   m_Layer: 5
-  m_Name: Points
+  m_Name: PointsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9363,7 +9361,7 @@ GameObject:
   - component: {fileID: 1028080529}
   - component: {fileID: 1028080528}
   m_Layer: 5
-  m_Name: LabelPoints
+  m_Name: PointsLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13088,7 +13086,7 @@ GameObject:
   - component: {fileID: 1455040552}
   - component: {fileID: 1455040551}
   m_Layer: 5
-  m_Name: TimeLabel
+  m_Name: TimerLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13133,7 +13131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Time remaining
+  m_text: 'Time remaining:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ae18e38dc3fc68a4982cc820afa68e77, type: 2}
   m_sharedMaterial: {fileID: -5697820109048906005, guid: ae18e38dc3fc68a4982cc820afa68e77, type: 2}
@@ -14047,6 +14045,8 @@ RectTransform:
   - {fileID: 1013747176}
   - {fileID: 1028080527}
   - {fileID: 907636203}
+  - {fileID: 8953799788656784424}
+  - {fileID: 2032435552892599570}
   m_Father: {fileID: 877136380}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -21578,7 +21578,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 877136380}
+    m_TransformParent: {fileID: 1542564741}
     m_Modifications:
     - target: {fileID: 130051435093847811, guid: 2d415f83e8d6af64c887cd16c52307e5, type: 3}
       propertyPath: m_Pivot.x
@@ -21606,11 +21606,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 130051435093847811, guid: 2d415f83e8d6af64c887cd16c52307e5, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1820
       objectReference: {fileID: 0}
     - target: {fileID: 130051435093847811, guid: 2d415f83e8d6af64c887cd16c52307e5, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 980
       objectReference: {fileID: 0}
     - target: {fileID: 130051435093847811, guid: 2d415f83e8d6af64c887cd16c52307e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21630,15 +21630,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 130051435093847811, guid: 2d415f83e8d6af64c887cd16c52307e5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 130051435093847811, guid: 2d415f83e8d6af64c887cd16c52307e5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 130051435093847811, guid: 2d415f83e8d6af64c887cd16c52307e5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 130051435093847811, guid: 2d415f83e8d6af64c887cd16c52307e5, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -22560,7 +22560,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 877136380}
+    m_TransformParent: {fileID: 1542564741}
     m_Modifications:
     - target: {fileID: 553286455160877232, guid: 6ba4921d3c6bb1a45ae65b9bf751a7f2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -22696,15 +22696,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7217299546069329836, guid: 6ba4921d3c6bb1a45ae65b9bf751a7f2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7217299546069329836, guid: 6ba4921d3c6bb1a45ae65b9bf751a7f2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7217299546069329836, guid: 6ba4921d3c6bb1a45ae65b9bf751a7f2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7217299546069329836, guid: 6ba4921d3c6bb1a45ae65b9bf751a7f2, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -22808,6 +22808,7 @@ SceneRoots:
   - {fileID: 585833814}
   - {fileID: 8607709462276976718}
   - {fileID: 877136380}
+  - {fileID: 1972246532}
   - {fileID: 447520109}
   - {fileID: 291056659}
   - {fileID: 5384723152214944260}
@@ -22818,7 +22819,6 @@ SceneRoots:
   - {fileID: 343809449}
   - {fileID: 2044786840}
   - {fileID: 2081548148}
-  - {fileID: 1972246532}
   - {fileID: 28720465}
   - {fileID: 1956483023}
   - {fileID: 2084821394}
