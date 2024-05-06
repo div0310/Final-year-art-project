@@ -11,6 +11,7 @@ public class StartGame : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //reset values at the beginning of the game
         healthBarSystem = FindObjectOfType<HealthBarSystem>();
         pointSystem = FindObjectOfType<PointsSystem>();
         healthBar = FindObjectOfType<HealthBar>();

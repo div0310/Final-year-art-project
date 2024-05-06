@@ -19,22 +19,23 @@ public class EnemyAI : MonoBehaviour
     public float sightRange = 10;
     public float chaseRange = 6; // Distance within which the enemy starts chasing the player
     public float attackRange = 1;
+
     public float chaseCooldownTime = 5f;
     public float patrolCooldownTime = 5f;
     private float patrolCurrentCooldownTime = 0;
     private bool isOnCooldownPatrol = false;
     private float currentCooldownTime = 0;
     private bool isOnCooldown = false;
+
     private EnemyState currentState = EnemyState.Idle;
     private NavMeshAgent navMeshAgent;
     private Animator _animator;
+
     private int currentPatrolIndex;
     private Transform targetPatrolPoint;
 
     public FieldOfView fieldOfView;
 
-    //private float idleTimer = 0f;
-    //float idleDuration = 5f;
 
     void Start()
     {
@@ -53,7 +54,6 @@ public class EnemyAI : MonoBehaviour
         {
             nextIndex = UnityEngine.Random.Range(0, patrolPoints.Count);
         }
-
         currentPatrolIndex = nextIndex;
         targetPatrolPoint = patrolPoints[currentPatrolIndex];
         SetDestination(targetPatrolPoint.position);
@@ -67,7 +67,6 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
         switch (currentState)
         {
             case EnemyState.Idle:
@@ -81,7 +80,6 @@ public class EnemyAI : MonoBehaviour
                     currentState = EnemyState.Chase;
                     break;
                 }
-
                 if (navMeshAgent.remainingDistance < 0.1f)
                 {
 
@@ -92,15 +90,12 @@ public class EnemyAI : MonoBehaviour
             case EnemyState.Chase:
                 if (!isOnCooldownPatrol)
                 {
-
-
-                    if (distanceToPlayer <= attackRange && fieldOfView.canSeePlayer)//go back to patrol when enemy cant see player or player is not in chase range
+                    if (distanceToPlayer <= attackRange && fieldOfView.canSeePlayer)//if player in attack range and enemys field of view, enter attack state
                     {
 
                         currentState = EnemyState.Attack;
                         break;
                     }
-
                     if (distanceToPlayer > chaseRange || !fieldOfView.canSeePlayer)//go back to patrol when enemy cant see player or player is not in chase range
                     {
                         patrolCurrentCooldownTime = patrolCooldownTime;
@@ -109,8 +104,6 @@ public class EnemyAI : MonoBehaviour
                         currentState = EnemyState.Patrol;
                         GetNextPatrolPoint();
                     }
-                    
-                  
                 }
                 else
                 {
@@ -120,9 +113,6 @@ public class EnemyAI : MonoBehaviour
                         isOnCooldownPatrol = false;
                     }
                 }
-        
-                
-
                 SetDestination(player.position);
                 break;
 
@@ -130,12 +120,8 @@ public class EnemyAI : MonoBehaviour
                 if (!isOnCooldown)
                 {
                     _animator.Play("Punching");
-
-
                     currentCooldownTime = chaseCooldownTime;
                     isOnCooldown = true;
-                    // attack logic here
-
                 }
                 else
                 {
@@ -152,7 +138,6 @@ public class EnemyAI : MonoBehaviour
                 }
                 break;
         }
-
         UpdateAnimation();
     }
 
@@ -164,54 +149,21 @@ public class EnemyAI : MonoBehaviour
                 // Add idle animation
                 _animator.Play("Pose_Idle");
                 break;
+
             case EnemyState.Patrol:
                 // Add patrol animation
                 _animator.Play("Walk_F");
-
                 break;
+
             case EnemyState.Chase:
                 // Add chase animation
                 _animator.Play("Run_F 0");
-
                 break;
+
             case EnemyState.Attack:
                 // Add attack animation
                 _animator.Play("Punching");
-
                 break;
         }
     }
-
-    //private bool IsPlayerInSight()
-    //{
-    //    Debug.Log("Player in sight");
-    //    // Calculate direction to the player
-    //    Vector3 directionToPlayer = player.position - transform.position;
-
-    //    // Check if the player is within sight range
-    //    if (directionToPlayer.magnitude <= sightRange)
-    //    {
-    //        RaycastHit hit;
-    //        // Create a layer mask to ignore certain layers (e.g., the layer of maze walls)
-    //        LayerMask layerMask = ~LayerMask.GetMask("NavMesh");
-
-    //        // Perform a raycast with the specified layer mask
-    //        if (Physics.Raycast(transform.position, directionToPlayer, out hit, sightRange, layerMask))
-    //        {
-    //            // If the raycast hits something other than the player, return false
-    //            if (hit.transform != player)
-    //            {
-    //                return false;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            // If the raycast doesn't hit anything, return true (player is in sight)
-    //            return true;
-    //        }
-    //    }
-
-    //    // Player not detected within sight range or obstructed by obstacles
-    //    return false;
-    //}
 }
