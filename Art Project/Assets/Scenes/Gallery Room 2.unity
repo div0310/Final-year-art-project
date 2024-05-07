@@ -6113,7 +6113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13d4a0304fad2a4a95e954dd0285e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 10
+  timeValue: 210
   timeText: {fileID: 1013747178}
   currentScene: Gallery Room 2
   nextScene: Maze Scene 2
@@ -16080,6 +16080,21 @@ PrefabInstance:
     - target: {fileID: 3940449726820175484, guid: 1aa58377e51ebf5479bcc4bb63b916a8, type: 3}
       propertyPath: m_Name
       value: StartInfoPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079567362939451567, guid: 1aa58377e51ebf5479bcc4bb63b916a8, type: 3}
+      propertyPath: m_text
+      value: 'Gothic art style is defined by its innovations in both realistic human
+        representation and perspective. While previous eras of arts were marked by
+        two-dimensional representation of often idealized figures, Gothic art worked
+        to display more realistic renderings of human figures and their surroundings.
+
+
+        Please
+        walk around the room and study the images you see displayed on the pillars.
+        There will be a prompt that allows you to learn information about the different
+        art pieces. Make sure to pay attention!
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 4584059535668470286, guid: 1aa58377e51ebf5479bcc4bb63b916a8, type: 3}
       propertyPath: m_AnchorMax.x

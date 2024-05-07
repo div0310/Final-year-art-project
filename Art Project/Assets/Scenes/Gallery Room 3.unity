@@ -8896,10 +8896,9 @@ PrefabInstance:
         the natural world.
 
 
-        Please walk around the room and use your mouse
-        to click on the images you see displayed on the pillars. This prompt will
-        allow you to learn information about the different art pieces. Make sure
-        to pay attention!
+        Please walk around the room and study the images
+        you see displayed on the pillars. There will be a prompt that allows you
+        to learn information about the different art pieces. Make sure to pay attention!
 
 '
       objectReference: {fileID: 0}
@@ -11080,7 +11079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13d4a0304fad2a4a95e954dd0285e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 480
+  timeValue: 360
   timeText: {fileID: 1013747178}
   currentScene: Gallery Room 3
   nextScene: Maze Scene 3

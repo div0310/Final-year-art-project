@@ -9185,7 +9185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13d4a0304fad2a4a95e954dd0285e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 30
+  timeValue: 210
   timeText: {fileID: 1013747178}
   currentScene: Gallery Room 1
   nextScene: Maze Scene 1
@@ -20943,9 +20943,9 @@ MonoBehaviour:
     the complex issues that shape our diverse, global, and rapidly changing world.
     Through their work, many contemporary artists explore personal or cultural identity,
     offer critiques of social and institutional structures, or even attempt to redefine
-    art itself. \n\r\nPlease walk around the room and use your mouse to click on
-    the images you see displayed on the pillars. This prompt will allow you to learn
-    information about the different art pieces. Make sure to pay attention!\r\n"
+    art itself. \n\r\nPlease walk around the room and study the images you see displayed
+    on the pillars. There will be a prompt that allows you to learn information about
+    the different art pieces. Make sure to pay attention!\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9c486068dd3384944b53f82e9afcb0c0, type: 2}
   m_sharedMaterial: {fileID: 3087631018262114397, guid: 9c486068dd3384944b53f82e9afcb0c0, type: 2}
