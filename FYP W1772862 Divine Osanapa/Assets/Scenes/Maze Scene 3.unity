@@ -1062,7 +1062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13d4a0304fad2a4a95e954dd0285e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 480
+  timeValue: 240
   timeText: {fileID: 760677356}
   currentScene: Maze Scene 3
   nextScene: Win Scene

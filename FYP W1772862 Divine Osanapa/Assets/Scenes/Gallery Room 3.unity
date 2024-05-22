@@ -11079,7 +11079,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b13d4a0304fad2a4a95e954dd0285e40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeValue: 360
+  timeValue: 270
   timeText: {fileID: 1013747178}
   currentScene: Gallery Room 3
   nextScene: Maze Scene 3
